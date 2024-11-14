@@ -12,19 +12,22 @@
 <body class="bg-white bg-gradient">
 
 
-    <main>
-        <div class="container py-4 min-vh-100">
-            <header class="pb-3 mb-4">
-                <a href="/" class="d-flex align-items-center text-body-emphasis text-decoration-none">
-                    <span class="fs-4 text-dark">Warmup Games Generator</span>
+    <main class="bg-light">
+        <div class="container min-vh-100" py-4>
+            <header class="pb-3">
+                <a href="/" class="d-flex justify-content-center text-body-emphasis text-decoration-none">
+                    <span class="display-6 fw-bold text-dark">Warmup Games Generator</span>
                 </a>
             </header>
 
-            <div class="p-3 mb-4 bg-body-tertiary shadow-lg opacity-75 rounded-3">
-                <div class="container-fluid py-5 center-block">
-                    <h1 class="display-5 fw-bold text-center" id="game">Loading....</h1>
+            <div class="shadow-lg opacity-75 rounded-3 p-3 mb-4">
+                <div class="container-fluid py-3 center-block">
+                    <p class="display-4 fw-bold text-center" id="game">Loading....</p>
+                    <div class="fw-light text-center my-3" id="aka"></div>
+                    <div id="description"></div>
+
                     <div class="text-center">
-                        <a class="btn btn-primary btn-lg mt-5" role="button" onclick="getgame(api_url)">New Game</a>
+                        <a class="btn btn-primary btn-lg mt-5" role="button" onclick="getgame()">New Game</a>
                     </div>
                 </div>
             </div>
@@ -35,16 +38,19 @@
     </main>
 
     <script>
-        const game = document.getElementById("game")
-        const api_url = "https://r5uggfqikoh6ozoyu7fzd4gocq0woher.lambda-url.eu-north-1.on.aws/";
+        const game = document.getElementById("game");
+        const aka = document.getElementById("aka");
+        const description = document.getElementById("description")
 
-        async function getgame(url) {
-            const response = await fetch(url);
+        async function getgame() {
+            const response = await fetch("https://r5uggfqikoh6ozoyu7fzd4gocq0woher.lambda-url.eu-north-1.on.aws/");
             var data = await response.json();
-            game.innerHTML = data.game
+            game.innerHTML = data.game;
+            aka.innerHTML = data.aka;
+            description.innerHTML = data.description;
         }
 
-        getgame(api_url);
+        getgame();
     </script>
 
 
